@@ -25,6 +25,12 @@ def edit
   @picture = Picture.find(params[:id])
 end
 
+def destroy
+  @picture = Picture.find(params[:id])
+  @picture.destroy
+  redirect_to "/pictures"
+end
+
 def update
   @picture = Picture.find(params[:id])
   @picture.title = params[:picture][:title]
