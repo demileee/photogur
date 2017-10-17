@@ -1,7 +1,15 @@
 class PicturesController < ApplicationController
 
 def index
-  @pictures = Picture.all
+  @pictures = Picture.young
+end
+
+def search
+  @pictures = Picture.where("created_at LIKE ?", "%#{params[:q]}%")
+end
+
+def onemonth
+  @pictures = Picture.old
 end
 
 def new
@@ -9,10 +17,7 @@ def new
 end
 
 def create
-  @picture = Picture.new
-  @picture.title = params[:picture][:title]
-  @picture.artist = params[:picture][:artist]
-  @picture.url = params[:picture][:url]
+  @picture = Picture.new(picture_params)
 
   if @picture.save
     redirect_to "/pictures"
@@ -33,19 +38,19 @@ end
 
 def update
   @picture = Picture.find(params[:id])
-  @picture.title = params[:picture][:title]
-  @picture.artist = params[:picture][:artist]
-  @picture.url = params[:picture][:url]
 
-  if @picture.save
-    redirect_to "/pictures"
-  else
-    render :new
-  end
+  @picture.update(picture_params)
+  redirect_to pictures_path
+
 end
 
 def show
   @picture = Picture.find(params[:id])
 end
 
+end
+
+private
+def picture_params
+  params.require(:picture).permit(:artist, :title, :url)
 end

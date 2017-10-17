@@ -1,7 +1,12 @@
 <h1>Pictures</h1>
 <%= link_to("New Picture", "/pictures/new") %>
+<p><%= link_to "Pictures that are older than 1 month...", "/pictures/onemonth" %></p>
 
-<% @pictures.each do |picture| %>
-  <p><%= picture.title %>, <%= picture.artist %></p>
-  <%= link_to(image_tag(picture.url), "/pictures/#{picture.id}") %>
-<% end %>
+
+<p><%= form_tag("/pictures/search", method: "get") do %>
+  <%= label_tag(:q, "Search for:") %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("Search") %>
+<%end%></p>
+
+<%= render 'all_pictures', pictures: @pictures %>
