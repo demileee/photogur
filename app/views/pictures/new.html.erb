@@ -1,6 +1,6 @@
 <h1>Add a picture</h1>
 <%= link_to("Back to Pictures", "/pictures") %>
 
-<%= form_with scope: @picture, url: pictures_path do |f| %>
+<%= form_with scope: @picture, url: pictures_path, local: true do |f| %>
 <%= render "form", f: f %>
 <% end %>

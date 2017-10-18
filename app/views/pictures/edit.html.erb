@@ -4,6 +4,6 @@
   <%= link_to("Back", "/pictures/#{@picture.id}") %>
 </p>
 
-<%= form_with method: 'put', scope: @picture, url: picture_path do |f| %>
+<%= form_with method: 'put', scope: @picture, url: picture_path, local: true do |f| %>
   <%= render "form", f: f %>
 <% end %>
