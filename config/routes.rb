@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get 'pictures/onemonth' => 'pictures#onemonth'
   get 'pictures/search' => 'pictures#search'
 
+  resources :sessions, only: %i(create new destroy)
+
   resources :pictures
 
 end
