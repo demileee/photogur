@@ -1,5 +1,7 @@
 class PicturesController < ApplicationController
 
+before_action :ensure_logged_in, except: %i(:show :index)
+
 def index
   @pictures = Picture.young
 end
@@ -18,6 +20,7 @@ end
 
 def create
   @picture = Picture.new(picture_params)
+  @picture.user_id = params[:current_user]
 
   if @picture.save
     redirect_to "/pictures"

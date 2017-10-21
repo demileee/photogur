@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'pictures/search' => 'pictures#search'
 
   resources :sessions, only: %i(create new destroy)
+  resources :users, only: %i(new create)
 
   resources :pictures
 

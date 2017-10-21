@@ -1,5 +1,7 @@
 class Picture < ApplicationRecord
 
+  belongs_to :user
+
   validates :artist, presence: true
   validates :title, length: { maximum: 20,
                               minimum: 3 }
